@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"regexp"
 
-	"curl/internal/gurl"
+	"github.com/jirigoin/gurl/internal/gurl"
 )
 
 var notValidUrlErr = "Its not a valid URL:\n\t Valid examples: https://www.google.com \t http://www.example.com/ \n Value: %s"
