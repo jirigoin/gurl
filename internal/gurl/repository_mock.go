@@ -5,7 +5,6 @@
 package gurl
 
 import (
-	os "os"
 	reflect "reflect"
 
 	gomock "github.com/golang/mock/gomock"
@@ -35,15 +34,15 @@ func (m *MockRepositoryImpl) EXPECT() *MockRepositoryImplMockRecorder {
 }
 
 // Store mocks base method.
-func (m *MockRepositoryImpl) Store(url string, storeFile *os.File) error {
+func (m *MockRepositoryImpl) Store(url, filename string) error {
 	m.ctrl.T.Helper()
-	ret := m.ctrl.Call(m, "Store", url, storeFile)
+	ret := m.ctrl.Call(m, "Store", url, filename)
 	ret0, _ := ret[0].(error)
 	return ret0
 }
 
 // Store indicates an expected call of Store.
-func (mr *MockRepositoryImplMockRecorder) Store(url, storeFile interface{}) *gomock.Call {
+func (mr *MockRepositoryImplMockRecorder) Store(url, filename interface{}) *gomock.Call {
 	mr.mock.ctrl.T.Helper()
-	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Store", reflect.TypeOf((*MockRepositoryImpl)(nil).Store), url, storeFile)
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "Store", reflect.TypeOf((*MockRepositoryImpl)(nil).Store), url, filename)
 }

@@ -2,7 +2,6 @@ package gurl
 
 import (
 	"fmt"
-	"os"
 	"strings"
 )
 
@@ -24,19 +23,8 @@ type UseCaseImpl interface {
 }
 
 func (uc Usecase) Store(url string) error {
-	surl := strings.Split(url, "/")
-	fileName := surl[len(surl)-1]
+	sUrl := strings.Split(url, "/")
+	fileName := sUrl[len(sUrl)-1]
 	fmt.Println("Downloading from: ", url)
-
-	storeFile, err := os.Create("./store/" + fileName)
-	if err != nil {
-		panic(err)
-	}
-	defer func() {
-		if err := storeFile.Close(); err != nil {
-			panic(err)
-		}
-	}()
-
-	return uc.repository.Store(url, storeFile)
+	return uc.repository.Store(url, fileName)
 }

@@ -13,7 +13,7 @@ type Repository struct {
 }
 
 type RepositoryImpl interface {
-	Store(url string, storeFile *os.File) error
+	Store(url, filename string) error
 }
 
 func NewRepository(c *http.Client) RepositoryImpl {
@@ -25,7 +25,16 @@ func RepositoryFactory() RepositoryImpl {
 	return NewRepository(c)
 }
 
-func (r Repository) Store(url string, storeFile *os.File) error {
+func (r Repository) Store(url, filename string) error {
+	file, err := os.Create("./store/" + filename)
+	if err != nil {
+		panic(err)
+	}
+	defer func() {
+		if err := file.Close(); err != nil {
+			panic(err)
+		}
+	}()
 	response, err := http.Get(url)
 	if err != nil {
 		return err
@@ -38,7 +47,7 @@ func (r Repository) Store(url string, storeFile *os.File) error {
 	if response.StatusCode < http.StatusOK || response.StatusCode >= http.StatusMultipleChoices {
 		return fmt.Errorf("bad status code: %s", response.Status)
 	}
-	n, err := io.Copy(storeFile, response.Body)
+	n, err := io.Copy(file, response.Body)
 	if err != nil {
 		log.Fatalln("error while downloading", url, "-", err)
 		return err
