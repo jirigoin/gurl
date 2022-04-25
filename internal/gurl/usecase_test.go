@@ -2,8 +2,6 @@ package gurl
 
 import (
 	"errors"
-	"log"
-	"os"
 	"testing"
 
 	"github.com/golang/mock/gomock"
@@ -12,7 +10,6 @@ import (
 
 func TestUseCase_Store_Successful(t *testing.T) {
 	// Given
-	t.Cleanup(deleteFile)
 	filename := "url_test"
 	url := "http:www.test/" + filename
 
@@ -30,7 +27,6 @@ func TestUseCase_Store_Successful(t *testing.T) {
 
 func TestUseCase_Store_ReturnsAnError(t *testing.T) {
 	// Given
-	t.Cleanup(deleteFile)
 	filename := "url_test"
 	url := "http:www.test/" + filename
 	errMock := errors.New("mock-error")
@@ -46,12 +42,4 @@ func TestUseCase_Store_ReturnsAnError(t *testing.T) {
 	// Then
 	assert.NotNil(t, err)
 	assert.Equal(t, errMock, err)
-}
-
-func deleteFile() {
-	file := "../../store/url_test"
-	err := os.Remove(file)
-	if err != nil {
-		log.Fatalln(err)
-	}
 }
