@@ -2,7 +2,6 @@ package gurl
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -61,7 +60,6 @@ func TestRepository_Store_Successfully(t *testing.T) {
 	// Then
 	assert.Nil(t, err)
 	assert.True(t, isFileCreatedSuccessfully(r))
-	fmt.Println("")
 }
 
 func isFileCreatedSuccessfully(body string) bool {

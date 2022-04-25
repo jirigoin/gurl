@@ -59,6 +59,6 @@ func (r Repository) Store(url, filename string) error {
 		log.Fatalln("error while downloading", url, "-", err)
 		return err
 	}
-	fmt.Printf("Store %d bytes", n)
+	log.Printf("Store %d bytes\n", n)
 	return err
 }
