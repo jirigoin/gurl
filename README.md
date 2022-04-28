@@ -1,5 +1,5 @@
 
-# **`GURL`** - File Downloader from a URL
+# **`GURL`** - File Downloader from an URL
 
 Command Line Interface (CLI) that can be used to download a file, like a curl.
 
